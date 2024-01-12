@@ -5,9 +5,17 @@ import cookieParser from "cookie-parser";
 import "express-async-errors";
 import authRouter from "./routes/authRoutes.js";
 import errorHandlerMiddleware from "./middleware/errorHandler.js";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
+
+app.use(
+	cors({
+		origin: "https://homeshow-2.web.app",
+		methods: ["GET", "POST", "PATCH"]
+	})
+);
 
 app.use(express.json());
 app.use(cookieParser());
