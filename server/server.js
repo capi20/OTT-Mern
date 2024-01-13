@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
 	cors({
-		origin: "https://homeshow-2.web.app",
+		origin: "https://my-homeshow.web.app",
 		methods: ["GET", "POST", "PATCH"]
 	})
 );
