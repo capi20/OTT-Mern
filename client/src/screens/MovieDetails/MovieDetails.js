@@ -31,9 +31,7 @@ const MovieDetails = () => {
 		apiStart();
 		setDetails(null);
 		try {
-			let response = await movieDBInstance.get(
-				`/movie/${params.id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
-			);
+			let response = await movieDBInstance.get(`/movie/${params.id}`);
 
 			setDetails(response.data);
 			updateBgImage(response.data?.backdrop_path);
@@ -138,7 +136,7 @@ const MovieDetails = () => {
 						<div className="recommend">
 							<Row
 								title="Customer also watched"
-								fetchUrl={`/movie/${params.id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}`}
+								fetchUrl={`/movie/${params.id}/recommendations`}
 							/>
 						</div>
 					</>

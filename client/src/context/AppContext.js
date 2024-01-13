@@ -173,9 +173,7 @@ export const AppProvider = ({ children }) => {
 	};
 
 	const fetchMovieVideos = async (movieId) => {
-		const movieData = await movieDBInstance.get(
-			`/movie/${movieId}/videos?api_key=${process.env.REACT_APP_TMDB_KEY}`
-		);
+		const movieData = await movieDBInstance.get(`/movie/${movieId}/videos`);
 		const vidId =
 			movieData.data.results.find(
 				(vid) => vid.name === "Trailer" || vid.name === "Official Trailer"
@@ -183,28 +181,6 @@ export const AppProvider = ({ children }) => {
 
 		const renderData = <YouTube videoId={vidId.key} opts={opts} />;
 		setModalData(renderData);
-	};
-
-	const searchMovie = async (query) => {
-		dispatch({
-			type: SEARCH_MOVIE_START
-		});
-		try {
-			const request = await movieDBInstance.get(
-				`${searchAPI}&query=${query}&page=1`
-			);
-			const data = request.data.results.length ? request.data.results : "";
-			setTimeout(() => {
-				dispatch({
-					type: SEARCH_MOVIE_SUCCESS,
-					payload: { data }
-				});
-			}, 10000);
-		} catch (error) {
-			dispatch({
-				type: SEARCH_MOVIE_ERROR
-			});
-		}
 	};
 
 	return (
@@ -219,7 +195,6 @@ export const AppProvider = ({ children }) => {
 				logoutUser,
 				handleChange,
 				displayAlert,
-				searchMovie,
 				apiStart,
 				apiSuccess,
 				apiError,

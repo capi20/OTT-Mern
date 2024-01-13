@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const StyledPageWrapper = styled.div`
-	padding: 150px 60px 0;
+	padding: 150px 60px 30px;
 
 	@media only screen and (max-width: 768px) {
-		padding: 150px 30px 0;
+		padding: 150px 30px 30px;
 	}
 `;
 
