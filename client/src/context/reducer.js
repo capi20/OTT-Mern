@@ -3,10 +3,7 @@ import {
 	CLOSE_MODAL,
 	OPEN_MODAL,
 	SET_MODAL_DATA,
-	LOGIN_USER,
 	LOGOUT_USER,
-	SEARCH_MOVIE_START,
-	SEARCH_MOVIE_SUCCESS,
 	DISPLAY_ALERT,
 	CLEAR_ALERT,
 	SETUP_USER_BEGIN,
@@ -14,7 +11,6 @@ import {
 	SETUP_USER_ERROR,
 	GET_CURRENT_USER_BEGIN,
 	GET_CURRENT_USER_SUCCESS,
-	SEARCH_MOVIE_ERROR,
 	API_START,
 	API_SUCCESS,
 	API_ERROR,
@@ -64,12 +60,12 @@ const reducer = (state, action) => {
 		case SETUP_USER_BEGIN:
 			return {
 				...state,
-				isLoading: true
+				userLoading: true
 			};
 		case SETUP_USER_SUCCESS:
 			return {
 				...state,
-				isLoading: false,
+				userLoading: false,
 				user: action.payload.user,
 				showAlert: true,
 				alertType: "success",
@@ -78,7 +74,7 @@ const reducer = (state, action) => {
 		case SETUP_USER_ERROR:
 			return {
 				...state,
-				isLoading: false,
+				userLoading: false,
 				showAlert: true,
 				alertType: "error",
 				alertMsg: action.payload.alertText

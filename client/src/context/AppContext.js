@@ -76,7 +76,7 @@ export const AppProvider = ({ children }) => {
 			const { data } = await serverInstance.get("/auth/getCurrentUser");
 			dispatch({ type: GET_CURRENT_USER_SUCCESS, payload: { user: data } });
 		} catch (error) {
-			if (error.response.status === 401) return;
+			// if (error.response.status === 401) return;
 			logoutUser();
 		}
 	};
