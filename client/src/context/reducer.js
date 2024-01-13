@@ -16,7 +16,8 @@ import {
 	API_ERROR,
 	UPDATE_USER_BEGIN,
 	UPDATE_USER_SUCCESS,
-	UPDATE_USER_ERROR
+	UPDATE_USER_ERROR,
+	SETUP_TEST_USER
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -24,6 +25,8 @@ const reducer = (state, action) => {
 		case DISPLAY_ALERT:
 			return {
 				...state,
+				isLoading: false,
+				userLoading: false,
 				showAlert: true,
 				alertType: "error",
 				alertMsg: action.payload.message
@@ -77,6 +80,14 @@ const reducer = (state, action) => {
 				userLoading: false,
 				showAlert: true,
 				alertType: "error",
+				alertMsg: action.payload.alertText
+			};
+		case SETUP_TEST_USER:
+			return {
+				...state,
+				showAlert: true,
+				alertType: "success",
+				user: action.payload.user,
 				alertMsg: action.payload.alertText
 			};
 		case LOGOUT_USER:

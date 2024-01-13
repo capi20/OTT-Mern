@@ -22,24 +22,19 @@ export const StyledBanner = styled.div`
 		position: absolute;
 		left: 60px;
 		top: 25%;
-		width: 40%;
+		width: 50%;
 
 		@media only screen and (max-width: 768px) {
 			width: 70%;
 			left: 30px;
 		}
 
-		&-title {
-			font-size: 2.5rem;
-			font-weight: 700;
-		}
-
 		&-buttons {
 			display: flex;
 			gap: 12px;
 
-			@media only screen and (max-width: 768px) {
-				flex-direction: column;
+			button {
+				font-size: 18px;
 			}
 		}
 	}

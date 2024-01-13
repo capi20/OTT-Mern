@@ -8,14 +8,11 @@ import {
 import YouTube from "react-youtube";
 import { movieDBInstance, serverInstance } from "../axios";
 import reducer from "./reducer";
-import { searchAPI } from "../Requests";
 import {
 	CLOSE_MODAL,
 	OPEN_MODAL,
 	SET_MODAL_DATA,
 	LOGOUT_USER,
-	SEARCH_MOVIE_START,
-	SEARCH_MOVIE_SUCCESS,
 	HANDLE_CHANGE,
 	DISPLAY_ALERT,
 	CLEAR_ALERT,
@@ -24,13 +21,13 @@ import {
 	SETUP_USER_ERROR,
 	GET_CURRENT_USER_BEGIN,
 	GET_CURRENT_USER_SUCCESS,
-	SEARCH_MOVIE_ERROR,
 	API_START,
 	API_SUCCESS,
 	API_ERROR,
 	UPDATE_USER_SUCCESS,
 	UPDATE_USER_BEGIN,
-	UPDATE_USER_ERROR
+	UPDATE_USER_ERROR,
+	SETUP_TEST_USER
 } from "./actions";
 
 const initialState = {
@@ -42,9 +39,7 @@ const initialState = {
 	alertMsg: "",
 	alertType: "",
 	isAuth: false,
-	user: null,
-	search: "",
-	searchResult: ""
+	user: null
 };
 
 const opts = {
@@ -77,7 +72,7 @@ export const AppProvider = ({ children }) => {
 			dispatch({ type: GET_CURRENT_USER_SUCCESS, payload: { user: data } });
 		} catch (error) {
 			// if (error.response.status === 401) return;
-			logoutUser();
+			logoutUser(true);
 		}
 	};
 
@@ -89,20 +84,19 @@ export const AppProvider = ({ children }) => {
 		dispatch({ type: API_SUCCESS });
 	};
 
-	const apiError = (message = "Something went wrong!") => {
+	const apiError = () => {
 		dispatch({ type: API_ERROR });
-		displayAlert(message);
 	};
 
-	const displayAlert = (message = "Please provide all values!") => {
+	const displayAlert = (message = "Please provide all values!", time = 6) => {
 		dispatch({ type: DISPLAY_ALERT, payload: { message } });
-		clearAlert();
+		clearAlert(time);
 	};
 
-	const clearAlert = () => {
+	const clearAlert = (time = 6) => {
 		setTimeout(() => {
 			dispatch({ type: CLEAR_ALERT });
-		}, 6000);
+		}, time * 1000);
 	};
 
 	const handleChange = ({ name, value }) => {
@@ -140,7 +134,12 @@ export const AppProvider = ({ children }) => {
 				payload: { alertText: error.response.data.msg }
 			});
 		}
-		clearAlert();
+		clearAlert(1);
+	};
+
+	const setupTestUser = async (user, alertText) => {
+		dispatch({ type: SETUP_TEST_USER, payload: { user, alertText } });
+		clearAlert(1);
 	};
 
 	const updateUser = async (currentUser) => {
@@ -157,7 +156,6 @@ export const AppProvider = ({ children }) => {
 			});
 		} catch (error) {
 			if (error.response.status !== 401) {
-				console.log(error.response.data.msg);
 				dispatch({
 					type: UPDATE_USER_ERROR,
 					payload: { msg: error.response.data.msg }
@@ -167,8 +165,10 @@ export const AppProvider = ({ children }) => {
 		clearAlert();
 	};
 
-	const logoutUser = async () => {
-		await serverInstance.get("auth/logout");
+	const logoutUser = async (isTestUser) => {
+		if (!isTestUser) {
+			await serverInstance.get("auth/logout");
+		}
 		dispatch({ type: LOGOUT_USER });
 	};
 
@@ -191,10 +191,12 @@ export const AppProvider = ({ children }) => {
 				closeModal,
 				fetchMovieVideos,
 				setupUser,
+				setupTestUser,
 				updateUser,
 				logoutUser,
 				handleChange,
 				displayAlert,
+				clearAlert,
 				apiStart,
 				apiSuccess,
 				apiError,

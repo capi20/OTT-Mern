@@ -13,9 +13,15 @@ export const Wrapper = styled.div`
 		}
 
 		&-img {
-			max-height: 300px;
+			width: 200px;
+			height: 300px;
 			object-fit: contain;
 			border-radius: 10px;
+
+			@media only screen and (max-width: 768px) {
+				width: 165px;
+				height: 250px;
+			}
 		}
 
 		&-action {

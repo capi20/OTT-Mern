@@ -98,7 +98,7 @@ const Navigation = () => {
 							<button
 								type="button"
 								className="user-dropdown_btn"
-								onClick={logoutUser}>
+								onClick={() => logoutUser(user.testUser)}>
 								logout
 							</button>
 						</li>

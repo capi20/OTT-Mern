@@ -10,6 +10,7 @@ export const StyledRow = styled.div`
 
 		@media only screen and (max-width: 768px) {
 			padding-left: 30px;
+			font-size: 20px;
 		}
 	}
 
@@ -18,10 +19,10 @@ export const StyledRow = styled.div`
 		gap: 15px;
 		overflow-y: auto;
 		overflow-x: scroll;
-		padding: 25px 0 40px 60px;
+		padding: 25px 60px 40px;
 
 		@media only screen and (max-width: 768px) {
-			padding: 25px 0 40px 30px;
+			padding: 25px 30px 40px;
 		}
 	}
 

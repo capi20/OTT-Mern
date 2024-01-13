@@ -3,9 +3,10 @@ import FormRow from "../../components/FormRow";
 import StyledAccount from "./Account.styled";
 import { useAppContext } from "../../context/AppContext";
 import PageWrapper from "../../hoc/PageWrapper";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Account = () => {
-	const { user, displayAlert, updateUser } = useAppContext();
+	const { user, displayAlert, updateUser, isLoading } = useAppContext();
 	const [values, setValues] = useState({
 		name: user.name,
 		email: user.email,
@@ -18,6 +19,12 @@ const Account = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		if (user.testUser) {
+			displayAlert("Test user can't do any changes");
+			return;
+		}
+
 		const { name, email, password } = values;
 		if (!name) {
 			displayAlert("Name can not be empty");
@@ -52,7 +59,18 @@ const Account = () => {
 					value={values.password}
 					handleChange={onChangeHandler}
 				/>
-				<button className="account-btn btn">Save changes</button>
+				<button className="account-btn btn">
+					{isLoading ? (
+						<CircularProgress
+							size={26}
+							sx={{
+								color: "#fff"
+							}}
+						/>
+					) : (
+						"Save changes"
+					)}
+				</button>
 			</form>
 		</StyledAccount>
 	);

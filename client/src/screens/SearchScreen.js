@@ -6,9 +6,10 @@ import { useAppContext } from "../context/AppContext";
 import { useEffect, useState } from "react";
 import { searchAPI } from "../Requests";
 import { movieDBInstance } from "../axios";
-import { Skeleton } from "@mui/material";
 import NotFound from "../components/NotFound";
 import SectionWrapper from "../hoc/PageWrapper";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const StyledSearchScreen = styled.div`
 	color: white;
@@ -28,7 +29,7 @@ const StyledSearchScreen = styled.div`
 
 const SearchScreen = () => {
 	const params = useParams();
-	const { isLoading, apiStart, apiSuccess, apiError } = useAppContext();
+	const { isLoading, apiStart, apiSuccess, displayAlert } = useAppContext();
 	const [searchResult, setSearchResult] = useState(null);
 
 	useEffect(() => {
@@ -43,7 +44,7 @@ const SearchScreen = () => {
 				setSearchResult(data);
 				apiSuccess();
 			} catch (error) {
-				apiError();
+				displayAlert("Something went wrong!");
 			}
 		};
 
@@ -72,13 +73,15 @@ const SearchScreen = () => {
 					notFound={!searchResult ? true : false}
 				/>
 			) : (
-				<Skeleton
-					variant="rectangular"
-					animation="wave"
-					height={window.innerHeight - 200}
-					width="100%"
-					sx={{ bgcolor: "grey.900" }}
-				/>
+				<Box
+					sx={{
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						height: "200px"
+					}}>
+					<CircularProgress />
+				</Box>
 			)}
 		</StyledSearchScreen>
 	);

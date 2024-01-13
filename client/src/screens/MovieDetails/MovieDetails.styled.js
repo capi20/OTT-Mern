@@ -40,11 +40,7 @@ const StyledMovieDetails = styled.div`
 
 			@media only screen and (max-width: 768px) {
 				max-width: 100%;
-			}
-
-			h2 {
-				color: orange;
-				font-size: 3rem;
+				font-size: 1rem;
 			}
 
 			&--length {
@@ -72,10 +68,6 @@ const StyledMovieDetails = styled.div`
 				padding: 10px 15px;
 				background: #192133;
 				border-radius: 10px;
-			}
-
-			button {
-				font-size: 1.25rem;
 			}
 		}
 	}

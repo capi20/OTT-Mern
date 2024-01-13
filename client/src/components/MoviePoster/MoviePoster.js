@@ -24,6 +24,7 @@ const MoviePoster = ({ movie }) => {
 								src={`${poster_url}${movie.poster_path}`}
 								alt={movie.name}
 								onClick={() => navigate(`/details/${movie.id}`)}
+								loading="lazy"
 							/>
 							<div className="row__poster-action">
 								<PlayArrowIcon onClick={() => fetchMovieVideos(movie.id)} />

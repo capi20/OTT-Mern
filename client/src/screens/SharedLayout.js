@@ -13,6 +13,7 @@ const SharedLayout = () => {
 		modalBody,
 		closeModal,
 		showAlert,
+		clearAlert,
 		alertType,
 		alertMsg,
 		bgImage,
@@ -23,6 +24,7 @@ const SharedLayout = () => {
 
 	useEffect(() => {
 		updateBgImage("");
+		clearAlert(0);
 	}, [location.pathname]);
 
 	return (
@@ -43,16 +45,18 @@ const SharedLayout = () => {
 				<Modal isOpen={isModalOpen} close={closeModal}>
 					{modalBody}
 				</Modal>
-				<Snackbar
-					open={showAlert}
-					autoHideDuration={5000}
-					anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
-					<Alert
-						severity={alertType ? alertType : "success"}
-						sx={{ width: "100%" }}>
-						{alertMsg}
-					</Alert>
-				</Snackbar>
+				{showAlert && (
+					<Snackbar
+						open={showAlert}
+						autoHideDuration={5000}
+						anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
+						<Alert
+							severity={alertType ? alertType : "success"}
+							sx={{ width: "100%" }}>
+							{alertMsg}
+						</Alert>
+					</Snackbar>
+				)}
 			</main>
 		</>
 	);

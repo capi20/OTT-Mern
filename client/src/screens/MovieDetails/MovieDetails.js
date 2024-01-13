@@ -19,7 +19,7 @@ const MovieDetails = () => {
 		fetchMovieVideos,
 		apiStart,
 		apiSuccess,
-		apiError,
+		displayAlert,
 		updateBgImage
 	} = useAppContext();
 
@@ -37,7 +37,7 @@ const MovieDetails = () => {
 			updateBgImage(response.data?.backdrop_path);
 			apiSuccess();
 		} catch (error) {
-			apiError("Something went wrong!");
+			displayAlert("Something went wrong!");
 		}
 	}
 
@@ -86,22 +86,25 @@ const MovieDetails = () => {
 									</>
 								) : (
 									<>
-										{details?.title && <h2>{details.title}</h2>}
+										{details?.title && (
+											<h1 className="movie-title color-primary">
+												{details.title}
+											</h1>
+										)}
 										{details?.overview && <p>{details.overview}</p>}
-										{details?.release_date ||
-											(details?.runtime && (
-												<p className="details-content--length">
-													{details.release_date}
-													{details?.runtime && (
-														<span>
-															&nbsp;&nbsp;&nbsp;&nbsp;
-															{`${Math.floor(details?.runtime / 60)} h ${
-																details?.runtime % 60
-															} min`}
-														</span>
-													)}
-												</p>
-											))}
+										{(details?.release_date || details?.runtime) && (
+											<p className="details-content--length">
+												{details.release_date}
+												{details?.runtime && (
+													<span>
+														&nbsp;&nbsp;&nbsp;&nbsp;
+														{`${Math.floor(details?.runtime / 60)} h ${
+															details?.runtime % 60
+														} min`}
+													</span>
+												)}
+											</p>
+										)}
 										{details?.genres && (
 											<div className="details-content--genres">
 												{details.genres.map((genre) => (

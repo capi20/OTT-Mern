@@ -37,7 +37,7 @@ const Banner = ({}) => {
 			{movie ? (
 				<div className="banner">
 					<div className="banner__content">
-						<h1 className="banner__content-title mb-3">
+						<h1 className="movie-title mb-3">
 							{movie?.title || movie?.name || movie?.original_name}
 						</h1>
 						<div className="banner__content-buttons">
@@ -51,7 +51,7 @@ const Banner = ({}) => {
 								className="banner__content-button btn"
 								onClick={() => navigate(`/details/${movie.id}`)}>
 								<InfoIcon />
-								<span>More Info</span>
+								<span>Info</span>
 							</button>
 						</div>
 					</div>

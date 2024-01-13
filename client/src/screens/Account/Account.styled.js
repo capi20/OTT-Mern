@@ -8,6 +8,10 @@ const StyledAccount = styled.div`
 		flex-direction: column;
 		gap: 30px;
 
+		h1 {
+			font-weight: 500;
+		}
+
 		label {
 			color: #fff;
 		}

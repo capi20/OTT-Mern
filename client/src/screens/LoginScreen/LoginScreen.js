@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormRow from "../../components/FormRow.js";
 import { useAppContext } from "../../context/AppContext.js";
 import { StyledLogin } from "./LoginScreen.styled.js";
 import login_logo from "../../images/login_logo.svg";
 import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const initialState = {
 	name: "",
@@ -16,12 +17,13 @@ const initialState = {
 function SignInScreen() {
 	const [values, setValues] = useState(initialState);
 	const {
-		isLoading,
+		userLoading,
 		user,
 		showAlert,
 		alertType,
 		alertMsg,
 		setupUser,
+		setupTestUser,
 		displayAlert
 	} = useAppContext();
 	const navigate = useNavigate();
@@ -58,7 +60,7 @@ function SignInScreen() {
 	};
 
 	const toggleMember = () => {
-		setValues({ ...values, isMember: !values.isMember });
+		setValues({ ...initialState, isMember: !values.isMember });
 	};
 
 	return (
@@ -90,22 +92,29 @@ function SignInScreen() {
 				/>
 				<button
 					type="submit"
-					className="mt-2"
+					className="mt-2 btn"
 					onClick={signIn}
-					disabled={isLoading}>
-					Submit
+					disabled={userLoading}>
+					{userLoading ? (
+						<CircularProgress
+							size={24}
+							sx={{
+								color: "#fff"
+							}}
+						/>
+					) : (
+						"Submit"
+					)}
 				</button>
 				<button
 					type="button"
-					className="demo-button"
+					className="demo-button btn"
 					onClick={() => {
-						setupUser(
-							{ email: "testUser@test.com", password: "secret" },
-							"login",
+						setupTestUser(
+							{ email: "testUser@test.com", name: "test user", testUser: true },
 							"Login Successful! Redirecting..."
 						);
-					}}
-					disabled={isLoading}>
+					}}>
 					Demo App
 				</button>
 				<p>
