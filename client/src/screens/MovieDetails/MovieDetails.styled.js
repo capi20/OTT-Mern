@@ -15,8 +15,7 @@ const StyledMovieDetails = styled.div`
 		}
 
 		&-img {
-			max-width: 33%;
-			min-width: 33%;
+			width: 33%;
 			text-align: right;
 
 			@media only screen and (max-width: 768px) {
@@ -30,8 +29,7 @@ const StyledMovieDetails = styled.div`
 		}
 
 		&-content {
-			max-width: 50%;
-			min-width: 50%;
+			width: 50%;
 			color: #fff;
 			display: flex;
 			flex-direction: column;
@@ -39,7 +37,7 @@ const StyledMovieDetails = styled.div`
 			font-size: 1.25rem;
 
 			@media only screen and (max-width: 768px) {
-				max-width: 100%;
+				width: 100%;
 				font-size: 1rem;
 			}
 

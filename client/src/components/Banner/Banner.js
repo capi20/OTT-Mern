@@ -51,7 +51,7 @@ const Banner = ({}) => {
 								className="banner__content-button btn"
 								onClick={() => navigate(`/details/${movie.id}`)}>
 								<InfoIcon />
-								<span>Info</span>
+								<span>More Info</span>
 							</button>
 						</div>
 					</div>

@@ -1,11 +1,11 @@
 const requests = [
 	["Popular", `/movie/popular`],
 	["Top Rated", `/movie/top_rated?&language=en-US`],
-	["Action", `/discover/movie/?&with_genres=28`],
-	["Adventure", `/discover/movie/?&with_genres=12`],
-	["Animation", `/discover/movie/?&with_genres=16`],
-	["Comedy", `/discover/movie/?&with_genres=35`],
-	["Crime", `/discover/movie/?&with_genres=80`]
+	["Action", `/discover/movie?with_genres=28`],
+	["Adventure", `/discover/movie?with_genres=12`],
+	["Animation", `/discover/movie?with_genres=16`],
+	["Comedy", `/discover/movie?with_genres=35`],
+	["Crime", `/discover/movie?with_genres=80`]
 	// ["Documentary", `/discover/movie/?&with_genres=99`],
 	// ["Drama", `/discover/movie/?&with_genres=18`],
 	// ["Family", `/discover/movie/?&with_genres=10751`],

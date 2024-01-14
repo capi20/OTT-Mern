@@ -59,7 +59,7 @@ const MovieDetails = () => {
 									<Skeleton
 										variant="rectangular"
 										animation="wave"
-										height="500px"
+										height={window.innerWidth < 768 ? "300px" : "500px"}
 										width="100%"
 									/>
 								)}
@@ -74,9 +74,9 @@ const MovieDetails = () => {
 											height={100}
 											width="100%"
 										/>
+										<Skeleton variant="text" animation="wave" width="200px" />
 										<Skeleton variant="text" animation="wave" width="100%" />
-										<Skeleton variant="text" animation="wave" width="100%" />
-										<Skeleton variant="text" animation="wave" width="100%" />
+										<Skeleton variant="text" animation="wave" width="100px" />
 										<Skeleton
 											variant="rectangular"
 											animation="wave"
@@ -118,10 +118,10 @@ const MovieDetails = () => {
 										)}
 										{details?.vote_average && (
 											<div className="details-content--rating">
-												<span className="mt-1">
-													{details?.vote_average?.toFixed(1)}
-												</span>{" "}
 												<StarIcon />
+												<span className="mt-1">
+													{details?.vote_average?.toFixed(1)} / 10
+												</span>
 											</div>
 										)}
 										{details?.id && (
@@ -136,12 +136,14 @@ const MovieDetails = () => {
 								)}
 							</div>
 						</div>
-						<div className="recommend">
-							<Row
-								title="Customer also watched"
-								fetchUrl={`/movie/${params.id}/recommendations`}
-							/>
-						</div>
+						{details && (
+							<div className="recommend">
+								<Row
+									title="Customer also watched"
+									fetchUrl={`/movie/${params.id}/recommendations`}
+								/>
+							</div>
+						)}
 					</>
 				)}
 			</div>
