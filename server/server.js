@@ -13,7 +13,7 @@ const app = express();
 app.use(
 	cors({
 		origin: "https://my-homeshow.web.app",
-		methods: ["GET", "POST", "PATCH"]
+		credentials: true
 	})
 );
 
