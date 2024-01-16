@@ -80,7 +80,7 @@ const SearchScreen = () => {
 						alignItems: "center",
 						height: "200px"
 					}}>
-					<CircularProgress />
+					<CircularProgress sx={{ color: "orange" }} />
 				</Box>
 			)}
 		</StyledSearchScreen>

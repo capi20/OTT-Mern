@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children }) => {
 					alignItems: "center",
 					height: "100vh"
 				}}>
-				<CircularProgress />
+				<CircularProgress sx={{ color: "orange" }} />
 			</Box>
 		);
 	}
