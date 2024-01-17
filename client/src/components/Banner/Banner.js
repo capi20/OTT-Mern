@@ -10,22 +10,35 @@ import { Skeleton } from "@mui/material";
 
 const Banner = ({}) => {
 	const navigate = useNavigate();
+	const [currentMovie, setCurrentMovie] = useState(0);
+	const [trending, setTrending] = useState(null);
 	const [movie, setMovie] = useState(null);
 	const { fetchMovieVideos } = useAppContext();
 
 	useEffect(() => {
 		async function fetchData() {
 			const request = await movieDBInstance.get(trendingAPI);
-			setMovie(
-				request.data.results[
-					Math.floor(Math.random() * request.data.results.length - 1)
-				]
-			);
+			setTrending(request.data.results);
+			setMovie(request.data.results[0]);
 			return request;
 		}
 
 		fetchData();
 	}, []);
+
+	useEffect(() => {
+		if (trending) {
+			setTimeout(() => {
+				if (currentMovie < trending.length - 1) {
+					setMovie(trending[currentMovie + 1]);
+					setCurrentMovie(currentMovie + 1);
+				} else {
+					setMovie(trending[0]);
+					setCurrentMovie(0);
+				}
+			}, 6000);
+		}
+	}, [movie]);
 
 	return (
 		<StyledBanner

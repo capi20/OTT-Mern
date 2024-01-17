@@ -5,33 +5,51 @@ export const StyledLogin = styled.div`
 	letter-spacing: 1px;
 	font-size: 1.125rem;
 	display: flex;
-	justify-content: space-around;
 	align-items: center;
 	background: white;
 	min-height: 100vh;
-	padding: 0 10px;
 	background: #192133;
 
 	@media only screen and (max-width: 768px) {
 		font-size: 1rem;
 	}
 
+	.heading {
+		font-weight: 500;
+
+		@media only screen and (max-width: 768px) {
+			font-size: 28px;
+		}
+	}
+
+	.sub-heading {
+		font-size: 18px;
+		color: gray;
+		text-align: left;
+		margin-top: -11px;
+		margin-bottom: 15px;
+	}
+
+	.form-wrapper {
+		flex: 1;
+		background: white;
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
 	form {
+		flex: 1;
 		color: #192133;
-		background: #fff;
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
-		min-width: 30%;
-		max-width: 40%;
+		max-width: 512px;
 		padding: 30px;
-		box-shadow: 0px 0px 63px -17px rgba(0, 0, 0, 0.75);
-		-webkit-box-shadow: 0px 0px 63px -17px rgba(0, 0, 0, 0.75);
-		-moz-box-shadow: 0px 0px 63px -17px rgba(0, 0, 0, 0.75);
 
-		@media only screen and (max-width: 768px) {
-			min-width: 70%;
-			max-width: 100%;
+		label {
+			font-size: 16px;
 		}
 	}
 
@@ -59,11 +77,17 @@ export const StyledLogin = styled.div`
 		width: auto;
 	}
 
-	.login-img {
-		max-width: 40%;
+	.img-wrapper {
+		flex: 1;
+		padding: 20px;
+		text-align: center;
 
 		@media only screen and (max-width: 768px) {
 			display: none;
 		}
+	}
+
+	.login-img {
+		max-width: 90%;
 	}
 `;

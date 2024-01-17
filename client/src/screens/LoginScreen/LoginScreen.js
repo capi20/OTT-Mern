@@ -65,67 +65,78 @@ function SignInScreen() {
 
 	return (
 		<StyledLogin className="login">
-			<form>
-				<h1 className="mb-2 align-center">
-					{values.isMember ? "Login" : "Register"}
-				</h1>
-				{showAlert && <Alert severity={alertType}>{alertMsg}</Alert>}
-				{!values.isMember && (
+			<div className="form-wrapper">
+				<form>
+					<h1 className="heading">
+						Welcome to <span className="color-primary">HomeShow</span>
+					</h1>
+					<p className="mb-2 sub-heading">
+						{values.isMember ? "Login to your account" : "Create your account"}
+					</p>
+					{showAlert && <Alert severity={alertType}>{alertMsg}</Alert>}
+					{!values.isMember && (
+						<FormRow
+							type="text"
+							name="name"
+							value={values.name}
+							handleChange={onChangeHandler}
+						/>
+					)}
 					<FormRow
-						type="text"
-						name="name"
-						value={values.name}
+						type="email"
+						name="email"
+						value={values.email}
 						handleChange={onChangeHandler}
 					/>
-				)}
-				<FormRow
-					type="email"
-					name="email"
-					value={values.email}
-					handleChange={onChangeHandler}
-				/>
-				<FormRow
-					type="password"
-					name="password"
-					value={values.password}
-					handleChange={onChangeHandler}
-				/>
-				<button
-					type="submit"
-					className="mt-2 btn"
-					onClick={signIn}
-					disabled={userLoading}>
-					{userLoading ? (
-						<CircularProgress
-							size={24}
-							sx={{
-								color: "#fff"
-							}}
-						/>
-					) : (
-						"Submit"
-					)}
-				</button>
-				<button
-					type="button"
-					className="demo-button btn"
-					onClick={() => {
-						setupTestUser(
-							{ email: "testUser@test.com", name: "test user", testUser: true },
-							"Login Successful! Redirecting..."
-						);
-					}}>
-					Demo App
-				</button>
-				<p>
-					{values.isMember ? "Not a member yet?" : "Already a member?"}
-
-					<button type="button" onClick={toggleMember} className="member-btn">
-						{values.isMember ? "Register" : "Login"}
+					<FormRow
+						type="password"
+						name="password"
+						value={values.password}
+						handleChange={onChangeHandler}
+					/>
+					<button
+						type="submit"
+						className="mt-2 btn"
+						onClick={signIn}
+						disabled={userLoading}>
+						{userLoading ? (
+							<CircularProgress
+								size={24}
+								sx={{
+									color: "#fff"
+								}}
+							/>
+						) : (
+							"Submit"
+						)}
 					</button>
-				</p>
-			</form>
-			<img src={login_logo} alt="home cinema logo" className="login-img" />
+					<button
+						type="button"
+						className="demo-button btn"
+						onClick={() => {
+							setupTestUser(
+								{
+									email: "testUser@test.com",
+									name: "test user",
+									testUser: true
+								},
+								"Login Successful! Redirecting..."
+							);
+						}}>
+						Demo App
+					</button>
+					<p>
+						{values.isMember ? "Not a member yet?" : "Already a member?"}
+
+						<button type="button" onClick={toggleMember} className="member-btn">
+							{values.isMember ? "Register" : "Login"}
+						</button>
+					</p>
+				</form>
+			</div>
+			<div className="img-wrapper">
+				<img src={login_logo} alt="home cinema logo" className="login-img" />
+			</div>
 		</StyledLogin>
 	);
 }
