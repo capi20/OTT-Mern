@@ -36,7 +36,7 @@ const Banner = ({}) => {
 					setMovie(trending[0]);
 					setCurrentMovie(0);
 				}
-			}, 6000);
+			}, 10000);
 		}
 	}, [movie]);
 

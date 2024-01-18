@@ -13,14 +13,17 @@ export const Wrapper = styled.div`
 		}
 
 		&-img {
-			width: 200px;
-			height: 300px;
-			object-fit: contain;
-			border-radius: 10px;
+			width: 180px;
+			height: 270px;
 
 			@media only screen and (max-width: 768px) {
-				width: 165px;
-				height: 250px;
+				width: 140px;
+				height: 210px;
+			}
+
+			img {
+				object-fit: contain;
+				border-radius: 10px;
 			}
 		}
 

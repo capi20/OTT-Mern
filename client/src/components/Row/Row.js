@@ -9,7 +9,7 @@ import { useAppContext } from "../../context/AppContext";
 function Row({ title, fetchUrl }) {
 	const [movies, setMovies] = useState([]);
 	const [SkeletonCount, setSkeletonCount] = useState(0);
-	const { apiStart, apiSuccess, apiError, isLoading } = useAppContext();
+	const [isLoading, setIsLoading] = useState(false);
 
 	useLayoutEffect(() => {
 		let count = Math.floor(window.innerWidth / 200);
@@ -18,13 +18,13 @@ function Row({ title, fetchUrl }) {
 
 	useEffect(() => {
 		async function fetchData() {
-			apiStart();
+			setIsLoading(true);
 			try {
 				const request = await movieDBInstance.get(fetchUrl);
 				setMovies(request.data.results);
-				apiSuccess();
 			} catch (error) {
-				apiError();
+			} finally {
+				setIsLoading(false);
 			}
 		}
 

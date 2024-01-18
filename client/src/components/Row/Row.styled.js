@@ -19,10 +19,10 @@ export const StyledRow = styled.div`
 		gap: 15px;
 		overflow-y: auto;
 		overflow-x: scroll;
-		padding: 25px 60px 40px;
+		padding: 20px 60px 30px;
 
 		@media only screen and (max-width: 768px) {
-			padding: 25px 30px 40px;
+			padding: 20px 30px 25px;
 		}
 	}
 
