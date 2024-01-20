@@ -14,7 +14,19 @@ export const StyledRow = styled.div`
 		}
 	}
 
-	.row__posters {
+	.row-heading {
+		display: flex;
+		align-items: center;
+		gap: 40px;
+
+		a {
+			display: flex;
+			color: white;
+			text-decoration: none;
+		}
+	}
+
+	.row-posters {
 		display: flex;
 		gap: 15px;
 		overflow-y: auto;
@@ -26,7 +38,7 @@ export const StyledRow = styled.div`
 		}
 	}
 
-	.row__posters::-webkit-scrollbar {
+	.row-posters::-webkit-scrollbar {
 		display: none;
 	}
 `;

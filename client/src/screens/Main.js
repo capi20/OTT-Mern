@@ -26,7 +26,7 @@ const Main = () => {
 						</ProtectedRoute>
 					}>
 					<Route index element={<HomeScreen />} />
-					<Route path="search/:id" element={<SearchScreen />} />
+					<Route path="browse" element={<SearchScreen isSearch={false} />} />
 					<Route path="details/:id" element={<MovieDetails />} />
 					<Route path="account" element={<Account />} />
 				</Route>

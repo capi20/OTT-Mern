@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useRef, useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import MoviePoster from "../components/MoviePoster/MoviePoster";
 import styled from "styled-components";
 import { useAppContext } from "../context/AppContext";
-import { useEffect, useState } from "react";
-import { searchAPI } from "../Requests";
+import { genreMap, searchAPI } from "../Requests";
 import { movieDBInstance } from "../axios";
 import NotFound from "../components/NotFound";
 import SectionWrapper from "../hoc/PageWrapper";
@@ -25,54 +25,80 @@ const StyledSearchScreen = styled.div`
 	p {
 		font-size: 24px;
 	}
+
+	h2 {
+		font-weight: 600;
+	}
 `;
 
 const SearchScreen = () => {
-	const params = useParams();
+	const [searchParams] = useSearchParams();
+	const searchQuery = searchParams.get("search");
+	const searchGenre = searchParams.get("genre");
+	const inValidSearch =
+		(searchQuery && searchGenre) || !(searchQuery || searchGenre);
 	const { isLoading, apiStart, apiSuccess, displayAlert } = useAppContext();
-	const [searchResult, setSearchResult] = useState(null);
+	const [searchResult, setSearchResult] = useState([]);
+	const [pageNumber, setPageNumber] = useState(1);
+	const [hasMore, setHasMore] = useState(false);
+	const [resetFlag, setResetFlag] = useState(false);
+
+	const api = searchQuery
+		? `${searchAPI}&query=${searchQuery}`
+		: `/discover/movie?with_genres=${searchGenre}`;
 
 	useEffect(() => {
-		const searchMovie = async (query) => {
+		setPageNumber(1);
+		setSearchResult([]);
+		setResetFlag(!resetFlag);
+	}, [searchQuery]);
+
+	useEffect(() => {
+		const searchMovie = async () => {
 			apiStart();
-			setSearchResult(null);
 			try {
-				const request = await movieDBInstance.get(
-					`${searchAPI}&query=${query}&page=1`
-				);
-				const data = request.data.results.length ? request.data.results : "";
-				setSearchResult(data);
+				const res = await movieDBInstance.get(`${api}&page=${pageNumber}`);
+				const data = res.data.results.length ? res.data.results : [];
+				setSearchResult([...searchResult, ...data]);
+				setHasMore(res.data.results.length > 0);
 				apiSuccess();
 			} catch (error) {
 				displayAlert("Something went wrong!");
 			}
 		};
 
-		searchMovie(params.id);
-	}, [params.id]);
+		if (!inValidSearch) {
+			searchMovie();
+		}
+	}, [resetFlag, pageNumber]);
+
+	const observer = useRef();
+	const lastMovieRef = useCallback(
+		(node) => {
+			if (isLoading) return;
+			if (observer.current) observer.current.disconnect();
+			observer.current = new IntersectionObserver((entries) => {
+				if (entries[0].isIntersecting && hasMore) {
+					setPageNumber((prevPageNumber) => prevPageNumber + 1);
+				}
+			});
+			if (node) observer.current.observe(node);
+		},
+		[isLoading, hasMore]
+	);
 
 	return (
 		<StyledSearchScreen>
-			<p className="mb-3">
-				Searched for: <span className="color-primary">{params.id}</span>
-			</p>
+			<h2 className="mb-3">
+				{!inValidSearch && searchQuery && (
+					<>
+						Results for <span className="color-primary">"{searchQuery}"</span>
+					</>
+				)}
+				{!inValidSearch && searchGenre && `${genreMap[searchGenre]}`}
+			</h2>
 
-			{searchResult?.length > 0 ? (
-				<div className="search-movie-wrapper">
-					{searchResult.map((movie) => (
-						<MoviePoster key={movie.id} movie={movie} />
-					))}
-				</div>
-			) : !isLoading ? (
-				<NotFound
-					message={
-						searchResult?.length === 0
-							? "Oops! No result found"
-							: "Something went wrong!"
-					}
-					notFound={!searchResult ? true : false}
-				/>
-			) : (
+			{isLoading && (
 				<Box
 					sx={{
 						display: "flex",
@@ -82,6 +108,26 @@ const SearchScreen = () => {
 					}}>
 					<CircularProgress sx={{ color: "orange" }} />
 				</Box>
+			)}
+
+			{searchResult?.length > 0 && (
+				<div className="search-movie-wrapper">
+					{searchResult.map((movie, i) => {
+						if (searchResult.length === i + 1) {
+							return (
+								<div ref={lastMovieRef}>
+									<MoviePoster key={movie.id} movie={movie} />
+								</div>
+							);
+						} else {
+							return <MoviePoster key={movie.id} movie={movie} />;
+						}
+					})}
+				</div>
+			)}
+
+			{(inValidSearch || (!isLoading && searchResult?.length === 0)) && (
+				<NotFound message={"Oops! No result found"} notFound={false} />
 			)}
 		</StyledSearchScreen>
 	);

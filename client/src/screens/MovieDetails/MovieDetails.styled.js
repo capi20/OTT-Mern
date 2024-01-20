@@ -19,12 +19,11 @@ const StyledMovieDetails = styled.div`
 			text-align: right;
 
 			@media only screen and (max-width: 768px) {
-				max-width: 50%;
+				width: 50%;
 			}
 
 			img {
 				width: 100%;
-				max-width: 400px;
 			}
 		}
 
@@ -57,15 +56,12 @@ const StyledMovieDetails = styled.div`
 
 			&--genres {
 				display: flex;
-				gap: 10px;
+				gap: 20px;
 				flex-wrap: wrap;
 			}
 
 			&--genre {
-				font-size: 1rem;
-				padding: 10px 15px;
-				background: #192133;
-				border-radius: 10px;
+				color: white;
 			}
 		}
 	}

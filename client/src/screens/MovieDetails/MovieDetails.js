@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { movieDBInstance } from "../../axios";
 import { poster_url } from "../../Requests";
 import StyledMovieDetails from "./MovieDetails.styled";
@@ -50,17 +50,17 @@ const MovieDetails = () => {
 					<>
 						<div className="details">
 							<div className="details-img">
-								{!isLoading ? (
-									<img
-										src={`${poster_url}${details?.poster_path}`}
-										alt={details?.original_title}
-									/>
-								) : (
+								{isLoading ? (
 									<Skeleton
 										variant="rectangular"
 										animation="wave"
-										height={window.innerWidth < 768 ? "300px" : "500px"}
+										height="400px"
 										width="100%"
+									/>
+								) : (
+									<img
+										src={`${poster_url}${details?.poster_path}`}
+										alt={details?.original_title}
 									/>
 								)}
 							</div>
@@ -108,11 +108,14 @@ const MovieDetails = () => {
 										{details?.genres && (
 											<div className="details-content--genres">
 												{details.genres.map((genre) => (
-													<div
+													<Link
 														className="details-content--genre"
-														key={genre.id}>
+														to={{
+															pathname: "/browse",
+															search: `?genre=${genre.id}`
+														}}>
 														{genre.name}
-													</div>
+													</Link>
 												))}
 											</div>
 										)}

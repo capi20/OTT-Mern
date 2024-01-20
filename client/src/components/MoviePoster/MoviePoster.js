@@ -39,7 +39,7 @@ const MoviePoster = ({ movie }) => {
 		<>
 			{movie.poster_path && (
 				<>
-					<Wrapper>
+					<Wrapper isLoaded={imageLoaded}>
 						<div className="row__poster">
 							<div className="row__poster-img">
 								<Skeleton

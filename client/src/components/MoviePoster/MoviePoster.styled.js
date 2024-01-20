@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 		max-height: 300px;
 
 		&:hover {
-			transform: scale(1.15);
+			transform: ${(props) => (props.isLoaded ? "scale(1.15)" : "none")};
 			z-index: 9;
 		}
 

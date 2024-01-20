@@ -29,7 +29,7 @@ const Navigation = () => {
 
 	useEffect(() => {
 		if (localSearch) {
-			navigate(`/search/${localSearch}`);
+			navigate(`/browse?search=${localSearch}`);
 		}
 	}, [search]);
 

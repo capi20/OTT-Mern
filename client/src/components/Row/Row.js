@@ -4,7 +4,8 @@ import { movieDBInstance } from "../../axios";
 import MoviePoster from "../MoviePoster/MoviePoster";
 import { StyledRow } from "./Row.styled";
 import { Skeleton } from "@mui/material";
-import { useAppContext } from "../../context/AppContext";
+import { Link } from "react-router-dom";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 function Row({ title, fetchUrl }) {
 	const [movies, setMovies] = useState([]);
@@ -22,8 +23,8 @@ function Row({ title, fetchUrl }) {
 			try {
 				const request = await movieDBInstance.get(fetchUrl);
 				setMovies(request.data.results);
+				setIsLoading(false);
 			} catch (error) {
-			} finally {
 				setIsLoading(false);
 			}
 		}
@@ -33,24 +34,40 @@ function Row({ title, fetchUrl }) {
 
 	return (
 		<StyledRow>
-			{isLoading ? (
-				<>
-					{Array.from(Array(SkeletonCount), (e, i) => {
-						return (
-							<Skeleton
-								key={i}
-								variant="rectangular"
-								animation="wave"
-								height="300px"
-								width="100%"
-							/>
-						);
-					})}
-				</>
-			) : movies.length > 0 ? (
+			{isLoading && (
 				<>
 					<h2>{title}</h2>
-					<div className="row__posters">
+					<div className="row-posters">
+						{Array.from(Array(SkeletonCount), (e, i) => {
+							return (
+								<Skeleton
+									key={i}
+									variant="rectangular"
+									animation="wave"
+									height="300px"
+									width="200px"
+								/>
+							);
+						})}
+					</div>
+				</>
+			)}
+			{movies.length > 0 && (
+				<>
+					<div className="row-heading">
+						<h2>{title}</h2>
+						{fetchUrl.includes("with_genres") && (
+							<Link
+								to={{
+									pathname: "/browse",
+									search: `?genre=${fetchUrl.split("=")[1]}`
+								}}>
+								<span>See more </span>
+								<NavigateNextIcon />
+							</Link>
+						)}
+					</div>
+					<div className="row-posters">
 						{movies.map(
 							(movie) =>
 								movie.poster_path && (
@@ -59,8 +76,6 @@ function Row({ title, fetchUrl }) {
 						)}
 					</div>
 				</>
-			) : (
-				""
 			)}
 		</StyledRow>
 	);
