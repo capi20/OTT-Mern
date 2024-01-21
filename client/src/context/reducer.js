@@ -63,12 +63,12 @@ const reducer = (state, action) => {
 		case SETUP_USER_BEGIN:
 			return {
 				...state,
-				userLoading: true
+				isLoading: true
 			};
 		case SETUP_USER_SUCCESS:
 			return {
 				...state,
-				userLoading: false,
+				isLoading: false,
 				user: action.payload.user,
 				showAlert: true,
 				alertType: "success",
@@ -77,7 +77,7 @@ const reducer = (state, action) => {
 		case SETUP_USER_ERROR:
 			return {
 				...state,
-				userLoading: false,
+				isLoading: false,
 				showAlert: true,
 				alertType: "error",
 				alertMsg: action.payload.alertText

@@ -38,7 +38,8 @@ const SharedLayout = () => {
 						: "none",
 					backgroundSize: "cover",
 					backgroundPosition: "center center",
-					height: "100%"
+					height: "100%",
+					backgroundColor: "#192133"
 				}}>
 				<Outlet />
 

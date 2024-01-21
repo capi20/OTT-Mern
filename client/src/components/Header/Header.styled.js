@@ -17,7 +17,7 @@ export const StyledNav = styled.header`
 	);
 
 	@media only screen and (max-width: 768px) {
-		padding: 18px 30px;
+		padding: 14px 30px;
 	}
 
 	.nav__logo {
@@ -25,6 +25,10 @@ export const StyledNav = styled.header`
 		color: orange;
 		font-weight: 700;
 		font-size: 30px;
+
+		@media only screen and (max-width: 768px) {
+			font-size: 24px;
+		}
 	}
 
 	.nav {
@@ -35,8 +39,8 @@ export const StyledNav = styled.header`
 		gap: 20px;
 
 		svg {
-			width: 32px;
-			height: 32px;
+			width: 28px;
+			height: 28px;
 			color: white;
 		}
 	}
@@ -60,6 +64,10 @@ export const StyledNav = styled.header`
 			color: white;
 			font-size: 17px;
 			transition: all 0.3s;
+
+			@media only screen and (max-width: 768px) {
+				font-size: 14px;
+			}
 		}
 
 		.show-search {

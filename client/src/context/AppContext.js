@@ -131,7 +131,7 @@ export const AppProvider = ({ children }) => {
 		} catch (error) {
 			dispatch({
 				type: SETUP_USER_ERROR,
-				payload: { alertText: error.response.data.msg }
+				payload: { alertText: error.response?.data.msg }
 			});
 		}
 		clearAlert(1);

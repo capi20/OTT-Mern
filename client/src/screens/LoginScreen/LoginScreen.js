@@ -17,7 +17,7 @@ const initialState = {
 function SignInScreen() {
 	const [values, setValues] = useState(initialState);
 	const {
-		userLoading,
+		isLoading,
 		user,
 		showAlert,
 		alertType,
@@ -98,8 +98,8 @@ function SignInScreen() {
 						type="submit"
 						className="mt-2 btn"
 						onClick={signIn}
-						disabled={userLoading}>
-						{userLoading ? (
+						disabled={isLoading}>
+						{isLoading ? (
 							<CircularProgress
 								size={24}
 								sx={{

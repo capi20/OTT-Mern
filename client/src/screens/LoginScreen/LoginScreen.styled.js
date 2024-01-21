@@ -8,6 +8,7 @@ export const StyledLogin = styled.div`
 	align-items: center;
 	background: white;
 	min-height: 100vh;
+	min-height: 100svh;
 	background: #192133;
 
 	@media only screen and (max-width: 768px) {
@@ -34,6 +35,7 @@ export const StyledLogin = styled.div`
 		flex: 1;
 		background: white;
 		height: 100vh;
+		height: 100svh;
 		display: flex;
 		align-items: center;
 		justify-content: center;
