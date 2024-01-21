@@ -28,7 +28,13 @@ const SharedLayout = () => {
 	}, [location.pathname]);
 
 	return (
-		<>
+		<div
+			style={{
+				minHeight: "100vh",
+				maxWidth: "1440px",
+				margin: "auto",
+				backgroundColor: "#192133"
+			}}>
 			<Header />
 			<main
 				style={{
@@ -38,8 +44,7 @@ const SharedLayout = () => {
 						: "none",
 					backgroundSize: "cover",
 					backgroundPosition: "center center",
-					height: "100%",
-					backgroundColor: "#192133"
+					height: "100%"
 				}}>
 				<Outlet />
 
@@ -59,7 +64,7 @@ const SharedLayout = () => {
 					</Snackbar>
 				)}
 			</main>
-		</>
+		</div>
 	);
 };
 export default SharedLayout;

@@ -12,11 +12,13 @@ const StyledMovieDetails = styled.div`
 		@media only screen and (max-width: 768px) {
 			flex-direction: column;
 			align-items: center;
+			gap: 30px;
 		}
 
 		&-img {
-			width: 33%;
+			width: 30%;
 			text-align: right;
+			max-width: 450px;
 
 			@media only screen and (max-width: 768px) {
 				width: 50%;
@@ -62,6 +64,10 @@ const StyledMovieDetails = styled.div`
 
 			&--genre {
 				color: white;
+			}
+
+			button:hover {
+				background: orange;
 			}
 		}
 	}

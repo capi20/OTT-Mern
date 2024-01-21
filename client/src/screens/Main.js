@@ -15,21 +15,23 @@ const StyledRoot = styled.div`
 
 const Main = () => {
 	return (
-		<Routes>
-			<Route
-				path="/"
-				element={
-					<ProtectedRoute>
-						<SharedLayout />
-					</ProtectedRoute>
-				}>
-				<Route index element={<HomeScreen />} />
-				<Route path="browse" element={<SearchScreen isSearch={false} />} />
-				<Route path="details/:id" element={<MovieDetails />} />
-				<Route path="account" element={<Account />} />
-			</Route>
-			<Route path="login" element={<LoginScreen />} />
-		</Routes>
+		<StyledRoot>
+			<Routes>
+				<Route
+					path="/"
+					element={
+						<ProtectedRoute>
+							<SharedLayout />
+						</ProtectedRoute>
+					}>
+					<Route index element={<HomeScreen />} />
+					<Route path="browse" element={<SearchScreen isSearch={false} />} />
+					<Route path="details/:id" element={<MovieDetails />} />
+					<Route path="account" element={<Account />} />
+				</Route>
+				<Route path="login" element={<LoginScreen />} />
+			</Routes>
+		</StyledRoot>
 	);
 };
 

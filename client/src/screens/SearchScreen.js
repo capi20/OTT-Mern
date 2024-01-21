@@ -89,7 +89,7 @@ const SearchScreen = () => {
 
 	return (
 		<StyledSearchScreen>
-			<h2 className="mb-3">
+			<h2>
 				{!inValidSearch && searchQuery && (
 					<>
 						Results for <span className="color-primary">"{searchQuery}"</span>

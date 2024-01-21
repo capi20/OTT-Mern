@@ -32,7 +32,6 @@ const MovieDetails = () => {
 		setDetails(null);
 		try {
 			let response = await movieDBInstance.get(`/movie/${params.id}`);
-
 			setDetails(response.data);
 			updateBgImage(response.data?.backdrop_path);
 			apiSuccess();

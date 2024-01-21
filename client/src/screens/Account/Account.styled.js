@@ -8,8 +8,8 @@ const StyledAccount = styled.div`
 		flex-direction: column;
 		gap: 30px;
 
-		h1 {
-			font-weight: 500;
+		h2 {
+			font-weight: 600;
 		}
 
 		label {

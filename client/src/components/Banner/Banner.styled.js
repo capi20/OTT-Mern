@@ -18,6 +18,12 @@ export const StyledBanner = styled.div`
 		height: 100%;
 	}
 
+	.banner__content-wrapper {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+
 	.banner__content {
 		position: absolute;
 		left: 60px;

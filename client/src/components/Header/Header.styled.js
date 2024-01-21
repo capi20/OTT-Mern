@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledNav = styled.header`
+	max-width: 1440px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -24,7 +25,7 @@ export const StyledNav = styled.header`
 		cursor: pointer;
 		color: orange;
 		font-weight: 700;
-		font-size: 30px;
+		font-size: 26px;
 
 		@media only screen and (max-width: 768px) {
 			font-size: 24px;
