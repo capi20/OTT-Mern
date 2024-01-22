@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledNav = styled.header`
 	max-width: 1440px;
 	display: flex;
+	gap: 10px;
 	justify-content: space-between;
 	align-items: center;
 	position: fixed;
@@ -21,15 +22,15 @@ export const StyledNav = styled.header`
 		padding: 14px 30px;
 	}
 
+	@media only screen and (max-width: 540px) {
+		padding: 14px 10px;
+	}
+
 	.nav__logo {
 		cursor: pointer;
 		color: orange;
 		font-weight: 700;
-		font-size: 26px;
-
-		@media only screen and (max-width: 768px) {
-			font-size: 24px;
-		}
+		font-size: 24px;
 	}
 
 	.nav {
@@ -38,6 +39,7 @@ export const StyledNav = styled.header`
 		justify-content: flex-end;
 		flex: 1;
 		gap: 20px;
+		font-size: 18px;
 
 		svg {
 			width: 28px;
@@ -46,18 +48,14 @@ export const StyledNav = styled.header`
 		}
 	}
 
-	.nav__search {
+	.search-wrapper {
 		display: flex;
 		justify-content: flex-end;
-		width: 100%;
-		max-width: 300px;
 		position: relative;
-		z-index: 99;
 
 		input {
 			outline: none;
-			width: 0px;
-			opacity: 0;
+			width: 100%;
 			padding: 10px 15px;
 			margin-right: -35px;
 			border: 1px solid white;
@@ -68,12 +66,22 @@ export const StyledNav = styled.header`
 
 			@media only screen and (max-width: 768px) {
 				font-size: 14px;
+				top: -6px;
 			}
 		}
 
+		.nav-search {
+			opacity: 0;
+			width: 0;
+			position: absolute;
+			top: -24px;
+			right: 0;
+		}
+
 		.show-search {
-			width: 100%;
+			width: 300px;
 			opacity: 1;
+			z-index: 99;
 		}
 
 		button {
@@ -100,7 +108,7 @@ export const StyledNav = styled.header`
 		width: max-content;
 		color: #fff;
 		background: orange;
-		visibility: hidden;
+		display: none;
 		border-radius: 5px;
 		padding: 0.5rem;
 
@@ -119,8 +127,8 @@ export const StyledNav = styled.header`
 			cursor: pointer;
 		}
 	}
-	.show-dropdown {
-		visibility: visible;
+	.show {
+		display: block !important;
 	}
 
 	.user-icon {
@@ -128,5 +136,72 @@ export const StyledNav = styled.header`
 		display: flex;
 		align-items: center;
 		background: transparent;
+	}
+
+	.genre-wrapper {
+		position: relative;
+		color: white;
+		cursor: pointer;
+		width: 106px;
+	}
+
+	.genre {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		&-name {
+			text-overflow: ellipsis;
+			text-wrap: nowrap;
+			overflow: hidden;
+		}
+	}
+
+	.arrow-up {
+		transform: rotate(180deg);
+	}
+
+	.genre-list {
+		display: none;
+		background: #192133;
+		position: absolute;
+		z-index: 99;
+		left: 0;
+		top: 35px;
+		max-height: 250px;
+		overflow-y: auto;
+		border: 1px solid #fff;
+
+		li {
+			list-style: none;
+			font-size: 16px;
+			padding: 5px;
+			letter-spacing: 1;
+			text-align: center;
+			color: gray;
+
+			&:hover {
+				background: white;
+				color: black;
+			}
+		}
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
+	.watchlist {
+		@media only screen and (max-width: 540px) {
+			display: none;
+		}
+	}
+
+	.watchlist-menu {
+		display: none;
+
+		@media only screen and (max-width: 540px) {
+			display: block;
+		}
 	}
 `;

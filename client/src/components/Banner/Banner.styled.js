@@ -35,6 +35,10 @@ export const StyledBanner = styled.div`
 			left: 30px;
 		}
 
+		@media only screen and (max-width: 540px) {
+			left: 10px;
+		}
+
 		&-buttons {
 			display: flex;
 			gap: 12px;
