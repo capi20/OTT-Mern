@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 		max-height: 300px;
 
 		&:hover {
-			transform: ${(props) => (props.isLoaded ? "scale(1.15)" : "none")};
+			transform: ${(props) => (props.isLoaded ? "scale(1.07)" : "none")};
 			z-index: 9;
 		}
 
@@ -33,7 +33,7 @@ export const Wrapper = styled.div`
 			background: black;
 			opacity: 0.9;
 			width: 100%;
-			padding: 10px;
+			padding: 6px 0;
 			display: flex;
 			justify-content: space-around;
 			visibility: hidden;
@@ -44,14 +44,5 @@ export const Wrapper = styled.div`
 		&:hover .row__poster-action {
 			visibility: visible;
 		}
-	}
-
-	svg {
-		height: 25px;
-		width: 25px;
-	}
-
-	.like {
-		color: red;
 	}
 `;

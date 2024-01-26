@@ -1,5 +1,5 @@
 import { useRef, useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 import MoviePoster from "../components/MoviePoster/MoviePoster";
 import styled from "styled-components";
@@ -21,37 +21,34 @@ const StyledSearchScreen = styled.div`
 		gap: 30px;
 		justify-content: center;
 	}
-
-	p {
-		font-size: 24px;
-	}
-
-	h2 {
-		font-weight: 600;
-	}
 `;
 
 const SearchScreen = () => {
-	const [searchParams] = useSearchParams();
-	const searchQuery = searchParams.get("search");
-	const searchGenre = searchParams.get("genre");
-	const inValidSearch =
-		(searchQuery && searchGenre) || !(searchQuery || searchGenre);
-	const { isLoading, apiStart, apiSuccess, displayAlert } = useAppContext();
+	const params = useParams();
+	const location = useLocation();
+	const isSearch = location.pathname.includes("search");
+	const isGenre = location.pathname.includes("genre");
+	const isWatchlist = location.pathname.includes("watchlist");
+	const { isLoading, apiStart, apiSuccess, displayAlert, watchList } =
+		useAppContext();
 	const [searchResult, setSearchResult] = useState([]);
 	const [pageNumber, setPageNumber] = useState(1);
 	const [hasMore, setHasMore] = useState(false);
 	const [resetFlag, setResetFlag] = useState(false);
 
-	const api = searchQuery
-		? `${searchAPI}&query=${searchQuery}`
-		: `/discover/movie?with_genres=${searchGenre}`;
+	console.log(isWatchlist);
+
+	const api = isSearch
+		? `${searchAPI}&query=${params.id}`
+		: isGenre
+		? `/discover/movie?with_genres=${params.id}`
+		: "";
 
 	useEffect(() => {
 		setPageNumber(1);
 		setSearchResult([]);
 		setResetFlag(!resetFlag);
-	}, [searchQuery]);
+	}, [params.id]);
 
 	useEffect(() => {
 		const searchMovie = async () => {
@@ -67,7 +64,7 @@ const SearchScreen = () => {
 			}
 		};
 
-		if (!inValidSearch) {
+		if (isSearch || isGenre) {
 			searchMovie();
 		}
 	}, [resetFlag, pageNumber]);
@@ -89,14 +86,15 @@ const SearchScreen = () => {
 
 	return (
 		<StyledSearchScreen>
-			<h2>
-				{!inValidSearch && searchQuery && (
+			<h1 className="page-heading">
+				{isSearch && (
 					<>
-						Results for <span className="color-primary">"{searchQuery}"</span>
+						Results for <span className="color-primary">"{params.id}"</span>
 					</>
 				)}
-				{!inValidSearch && searchGenre && `${genreMap[searchGenre]}`}
-			</h2>
+				{isGenre && `${genreMap[params.id]}`}
+				{isWatchlist && `Watchlist`}
+			</h1>
 
 			{isLoading && (
 				<Box
@@ -110,7 +108,7 @@ const SearchScreen = () => {
 				</Box>
 			)}
 
-			{searchResult?.length > 0 && (
+			{(isSearch || isGenre) && searchResult?.length > 0 && (
 				<div className="search-movie-wrapper">
 					{searchResult.map((movie, i) => {
 						if (searchResult.length === i + 1) {
@@ -126,8 +124,31 @@ const SearchScreen = () => {
 				</div>
 			)}
 
-			{(inValidSearch || (!isLoading && searchResult?.length === 0)) && (
+			{isWatchlist && Object.keys(watchList).length > 0 && (
+				<div className="search-movie-wrapper">
+					{Object.keys(watchList).map((id) => {
+						return (
+							<MoviePoster
+								key={id}
+								movie={{
+									id,
+									poster_path: watchList[id]
+								}}
+							/>
+						);
+					})}
+				</div>
+			)}
+
+			{!isLoading && (isSearch || isGenre) && searchResult?.length === 0 && (
 				<NotFound message={"Oops! No result found"} notFound={false} />
+			)}
+
+			{!isLoading && isWatchlist && Object.keys(watchList).length === 0 && (
+				<NotFound
+					message={"Your Watchlist is currently empty"}
+					notFound={false}
+				/>
 			)}
 		</StyledSearchScreen>
 	);

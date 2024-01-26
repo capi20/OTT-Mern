@@ -7,8 +7,6 @@ export const StyledLogin = styled.div`
 	display: flex;
 	align-items: center;
 	background: white;
-	min-height: 100vh;
-	min-height: 100svh;
 	background: #192133;
 
 	@media only screen and (max-width: 768px) {

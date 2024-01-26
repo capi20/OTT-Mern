@@ -25,6 +25,7 @@ const Navigation = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		if (!location.pathname.includes("search")) {
 			setLocalSearch("");
 			setSearch("");

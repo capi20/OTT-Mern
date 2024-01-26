@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { movieDBInstance } from "../../axios";
-import { trendingAPI } from "../../Requests";
+import { backdrop_url, trendingAPI } from "../../Requests";
 import { StyledBanner } from "./Banner.styled";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import InfoIcon from "@mui/icons-material/Info";
@@ -44,7 +44,7 @@ const Banner = ({}) => {
 		<StyledBanner
 			style={{
 				backgroundImage: movie
-					? `url("https://image.tmdb.org/t/p/original${movie?.backdrop_path}")`
+					? `url("${backdrop_url}${movie?.backdrop_path}")`
 					: "none"
 			}}>
 			{movie ? (

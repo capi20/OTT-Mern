@@ -28,7 +28,7 @@ const reducer = (state, action) => {
 				isLoading: false,
 				userLoading: false,
 				showAlert: true,
-				alertType: "error",
+				alertType: action.payload.alertType,
 				alertMsg: action.payload.message
 			};
 		case CLEAR_ALERT:

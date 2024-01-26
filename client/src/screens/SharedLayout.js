@@ -5,7 +5,7 @@ import Alert from "@mui/material/Alert";
 import Header from "../components/Header/Header";
 import Modal from "../components/Modal/Modal";
 import { useAppContext } from "../context/AppContext";
-import { poster_url } from "../Requests";
+import { backdrop_url, poster_url } from "../Requests";
 
 const SharedLayout = () => {
 	const {
@@ -40,7 +40,7 @@ const SharedLayout = () => {
 				style={{
 					minHeight: "100vh",
 					backgroundImage: bgImage
-						? `linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url("${poster_url}${bgImage}")`
+						? `linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url("${backdrop_url}${bgImage}")`
 						: "none",
 					backgroundSize: "cover",
 					backgroundPosition: "center center",

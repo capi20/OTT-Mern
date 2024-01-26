@@ -59,10 +59,9 @@ function Row({ title, fetchUrl }) {
 						{fetchUrl.includes("with_genres") && (
 							<Link
 								to={{
-									pathname: "/browse",
-									search: `?genre=${fetchUrl.split("=")[1]}`
+									pathname: `/genre/${fetchUrl.split("=")[1]}`
 								}}>
-								<span>See more </span>
+								<span className="see-more">See more</span>
 								<NavigateNextIcon />
 							</Link>
 						)}

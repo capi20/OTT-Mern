@@ -6,8 +6,11 @@ const StyledNotFound = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 50px;
-	font-size: 1.5rem;
+
+	p {
+		font-size: 20px;
+		margin: 60px 0 30px;
+	}
 `;
 
 const NotFound = ({ message, notFound }) => {

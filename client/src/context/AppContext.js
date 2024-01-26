@@ -55,25 +55,40 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const [bgImage, setBgImage] = useState("");
+	const [watchList, setWatchList] = useState({});
 
 	useEffect(() => {
 		getCurrentUser();
 	}, []);
+
+	const updateWatchList = (id, movieBanner) => {
+		let movieId = String(id);
+		if (Object.keys(watchList).includes(movieId)) {
+			let newObj = { ...watchList };
+			delete newObj[movieId];
+			setWatchList(newObj);
+			displayAlert("Removed from watchlist", "success");
+		} else {
+			setWatchList((prevData) => ({ ...prevData, [movieId]: movieBanner }));
+			displayAlert("Added to watchlist", "success");
+		}
+	};
 
 	const updateBgImage = (path) => {
 		setBgImage(path);
 	};
 
 	const getCurrentUser = async () => {
-		dispatch({ type: GET_CURRENT_USER_BEGIN });
+		// dispatch({ type: GET_CURRENT_USER_BEGIN });
 
-		try {
-			const { data } = await serverInstance.get("/auth/getCurrentUser");
-			dispatch({ type: GET_CURRENT_USER_SUCCESS, payload: { user: data } });
-		} catch (error) {
-			// if (error.response.status === 401) return;
-			logoutUser(true);
-		}
+		// try {
+		// 	const { data } = await serverInstance.get("/auth/getCurrentUser");
+		// 	dispatch({ type: GET_CURRENT_USER_SUCCESS, payload: { user: data } });
+		// } catch (error) {
+		// 	// if (error.response.status === 401) return;
+		// 	logoutUser(true);
+		// }
+		logoutUser(true);
 	};
 
 	const apiStart = () => {
@@ -88,8 +103,12 @@ export const AppProvider = ({ children }) => {
 		dispatch({ type: API_ERROR });
 	};
 
-	const displayAlert = (message = "Please provide all values!", time = 6) => {
-		dispatch({ type: DISPLAY_ALERT, payload: { message } });
+	const displayAlert = (
+		message = "Please provide all values!",
+		alertType = "error",
+		time = 6
+	) => {
+		dispatch({ type: DISPLAY_ALERT, payload: { message, alertType } });
 		clearAlert(time);
 	};
 
@@ -201,7 +220,9 @@ export const AppProvider = ({ children }) => {
 				apiSuccess,
 				apiError,
 				bgImage,
-				updateBgImage
+				watchList,
+				updateBgImage,
+				updateWatchList
 			}}>
 			{children}
 		</AppContext.Provider>

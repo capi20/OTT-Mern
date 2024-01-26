@@ -8,11 +8,13 @@ const StyledMovieDetails = styled.div`
 		justify-content: center;
 		gap: 70px;
 		margin-bottom: 50px;
+		margin-top: 50px;
 
 		@media only screen and (max-width: 768px) {
 			flex-direction: column;
 			align-items: center;
 			gap: 30px;
+			margin-top: 0;
 		}
 
 		&-img {
@@ -66,8 +68,29 @@ const StyledMovieDetails = styled.div`
 				color: white;
 			}
 
-			button:hover {
-				background: orange;
+			&--btns {
+				display: flex;
+				gap: 20px;
+				flex-wrap: wrap;
+			}
+
+			.round-button {
+				height: 57px;
+				width: 57px;
+				background: #192133;
+
+				@media only screen and (max-width: 768px) {
+					height: 45px;
+					width: 45px;
+				}
+
+				svg {
+					font-size: 36px;
+
+					@media only screen and (max-width: 768px) {
+						font-size: 30px;
+					}
+				}
 			}
 		}
 	}

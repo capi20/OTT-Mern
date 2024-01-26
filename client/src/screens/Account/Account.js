@@ -39,7 +39,7 @@ const Account = () => {
 				{/* {showAlert && (
 					<Alert severity={alertType ? alertType : "success"}>{alertMsg}</Alert>
 				)} */}
-				<h2 className="color-primary">Account Details</h2>
+				<h1 className="page-heading color-primary">Account Details</h1>
 				<FormRow
 					type="name"
 					name="name"

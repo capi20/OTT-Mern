@@ -3,16 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { Wrapper } from "./MoviePoster.styled";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import InfoIcon from "@mui/icons-material/Info";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useAppContext } from "../../context/AppContext";
 import { poster_url } from "../../Requests";
 import { Skeleton } from "@mui/material";
+import DoneIcon from "@mui/icons-material/Done";
+import AddIcon from "@mui/icons-material/Add";
 
 const MoviePoster = ({ movie }) => {
 	const navigate = useNavigate();
-	const [like, setLike] = useState(false);
-	const { fetchMovieVideos, apiStart, apiSuccess, displayAlert } =
-		useAppContext();
+	const { fetchMovieVideos, updateWatchList, watchList } = useAppContext();
 	const [imageLoaded, setImageLoaded] = useState(false);
 
 	useEffect(() => {
@@ -22,18 +21,6 @@ const MoviePoster = ({ movie }) => {
 		};
 		img.src = `${poster_url}${movie.poster_path}`;
 	}, [movie.poster_path]);
-
-	// const updateWatchlist = async (movieId, banner) => {
-	// 	setLike(!like);
-	// 	apiStart();
-
-	// 	try {
-	// 		await serverInstance.patch("/watchlist/addMovie", { movieId, banner });
-	// 		apiSuccess();
-	// 	} catch (error) {
-	// 		displayAlert("Something went wrong");
-	// 	}
-	// };
 
 	return (
 		<>
@@ -52,7 +39,7 @@ const MoviePoster = ({ movie }) => {
 								<img
 									style={{ display: imageLoaded ? "block" : "none" }}
 									src={`${poster_url}${movie.poster_path}`}
-									alt={movie.name}
+									alt={movie.id}
 									onClick={() => navigate(`/details/${movie.id}`)}
 									loading="lazy"
 									height="100%"
@@ -61,14 +48,27 @@ const MoviePoster = ({ movie }) => {
 							</div>
 							{imageLoaded && (
 								<div className="row__poster-action">
-									<PlayArrowIcon onClick={() => fetchMovieVideos(movie.id)} />
-									<InfoIcon onClick={() => navigate(`/details/${movie.id}`)} />
-									<FavoriteIcon
-										className={like ? "like" : ""}
-										onClick={() => {
-											//updateWatchlist(movie.id, movie.poster_path);
-										}}
-									/>
+									<button
+										className="round-button"
+										onClick={() => fetchMovieVideos(movie.id)}>
+										<PlayArrowIcon />
+									</button>
+									<button
+										className="round-button"
+										onClick={() => navigate(`/details/${movie.id}`)}>
+										<InfoIcon />
+									</button>
+									<button
+										className="round-button"
+										onClick={() =>
+											updateWatchList(movie.id, movie.poster_path)
+										}>
+										{Object.keys(watchList).includes(`${movie.id}`) ? (
+											<DoneIcon />
+										) : (
+											<AddIcon />
+										)}
+									</button>
 								</div>
 							)}
 						</div>
