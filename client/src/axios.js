@@ -9,7 +9,6 @@ export const movieDBInstance = axios.create({
 });
 
 export const serverInstance = axios.create({
-	baseURL: "https://homeshow-server.onrender.com/api/v1",
-	//baseURL: "api/v1"
+	baseURL: "http://localhost:5000/api/v1",
 	withCredentials: true
 });

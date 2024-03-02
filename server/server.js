@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import "express-async-errors";
 import authRouter from "./routes/authRoutes.js";
-import movieRouter from "./routes/movieRoutes.js";
 import errorHandlerMiddleware from "./middleware/errorHandler.js";
 import cors from "cors";
 
@@ -14,7 +13,7 @@ const app = express();
 const origin =
 	process.env.NODE_ENV === "development"
 		? "http://localhost:5173"
-		: "https://my-home-show.web.app";
+		: process.env.CLIENT_URL;
 app.use(
 	cors({
 		origin,

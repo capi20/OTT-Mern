@@ -48,6 +48,7 @@ export const trendingAPI = `/trending/movie/week?&language=en-US`;
 
 export const searchAPI = `/search/movie?`;
 
-export const poster_url = "https://image.tmdb.org/t/p/original";
+export const poster_url = "https://image.tmdb.org/t/p/w342";
+export const backdrop_url = "https://image.tmdb.org/t/p/w1280";
 
 export default requests;
