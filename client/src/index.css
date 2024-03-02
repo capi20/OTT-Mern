@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
+:root {
+	--screen-md: 768px;
+	--screen-sm: 540px;
+}
+
 *,
 ::after,
 ::before {
@@ -29,11 +34,11 @@ button {
 	justify-content: center;
 	gap: 10px;
 	width: fit-content;
+	transition: all 450ms;
 }
 
 .btn:hover {
-	opacity: 0.9;
-	transition: all 0.2s;
+	transform: scale(1.02);
 }
 
 .mb-1 {
@@ -80,6 +85,28 @@ button {
 	font-size: 2.5rem;
 }
 
+.page-heading {
+	text-align: center;
+	font-size: 2rem;
+}
+
+.round-button {
+	background: transparent;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 450ms;
+}
+
+.round-button svg {
+	font-size: 30px;
+}
+
+.round-button:hover {
+	transform: scale(1.2);
+}
+
 @media only screen and (max-width: 768px) {
 	.btn {
 		font-size: 1rem;
@@ -87,5 +114,13 @@ button {
 
 	.movie-title {
 		font-size: 2rem;
+	}
+
+	.page-heading {
+		font-size: 28px;
+	}
+
+	.round-button svg {
+		font-size: 26px;
 	}
 }
