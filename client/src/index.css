@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 :root {
+	--screen-xxl: 1400px;
+	--screen-xl: 1200px;
+	--screen-lg: 900px;
 	--screen-md: 768px;
 	--screen-sm: 540px;
 }
@@ -122,5 +125,21 @@ button {
 
 	.round-button svg {
 		font-size: 26px;
+	}
+}
+
+.app-padding {
+	padding: 90px 40px 30px;
+}
+
+@media only screen and (max-width: 768px) {
+	.app-padding {
+		padding: 90px 30px 30px;
+	}
+}
+
+@media only screen and (max-width: 540px) {
+	.app-padding {
+		padding: 90px 10px 30px;
 	}
 }
