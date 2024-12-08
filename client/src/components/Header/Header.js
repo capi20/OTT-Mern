@@ -74,7 +74,7 @@ const Navigation = () => {
 	const optimizedDebounce = useMemo(() => debounce(), []);
 
 	return (
-		<StyledNav>
+		<StyledNav className="app-padding">
 			<Link to="/" style={{ textDecoration: "none" }}>
 				<div className="nav__logo">HomeShow</div>
 			</Link>
@@ -88,11 +88,19 @@ const Navigation = () => {
 								<span className="genre-name">
 									{genre ? genreMap[genre] : "Genre"}
 								</span>
-								<ArrowDropDownIcon className={showGenre ? "arrow-up" : ""} />
+								<ArrowDropDownIcon
+									className={showGenre ? "arrow-up" : ""}
+								/>
 							</div>
-							<ul className={showGenre ? "genre-list show" : "genre-list"}>
+							<ul
+								className={
+									showGenre ? "genre-list show" : "genre-list"
+								}>
 								{Object.keys(genreMap).map((el) => (
-									<li key={el} value={el} onClick={handleGenreChange}>
+									<li
+										key={el}
+										value={el}
+										onClick={handleGenreChange}>
 										{genreMap[el]}
 									</li>
 								))}
@@ -107,7 +115,9 @@ const Navigation = () => {
 						<div className="search-wrapper">
 							<div
 								className={
-									showSearch ? "nav-search show-search" : "nav-search"
+									showSearch
+										? "nav-search show-search"
+										: "nav-search"
 								}>
 								<input
 									ref={searchRef}
@@ -118,7 +128,8 @@ const Navigation = () => {
 									// className={showSearch ? "show-search" : ""}
 								/>
 								{showSearch && (
-									<IconButton onClick={() => showSearchHandler()}>
+									<IconButton
+										onClick={() => showSearchHandler()}>
 										<CloseIcon />
 									</IconButton>
 								)}
@@ -140,7 +151,9 @@ const Navigation = () => {
 						<PersonOutlineIcon />
 					</button>
 					<ul
-						className={showMenu ? "user-dropdown show" : "user-dropdown"}
+						className={
+							showMenu ? "user-dropdown show" : "user-dropdown"
+						}
 						onClick={() => setShowMenu(false)}>
 						<li>Hello, {user.name}</li>
 						<li className="watchlist-menu">

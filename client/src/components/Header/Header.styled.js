@@ -8,7 +8,8 @@ export const StyledNav = styled.header`
 	align-items: center;
 	position: fixed;
 	top: 0;
-	padding: 18px 60px;
+	padding-top: 18px;
+	padding-bottom: 18px;
 	width: 100%;
 	z-index: 999;
 	background-image: linear-gradient(
@@ -17,14 +18,6 @@ export const StyledNav = styled.header`
 		rgba(37, 37, 37, 0.7),
 		transparent
 	);
-
-	@media only screen and (max-width: 768px) {
-		padding: 14px 30px;
-	}
-
-	@media only screen and (max-width: 540px) {
-		padding: 14px 10px;
-	}
 
 	.nav__logo {
 		cursor: pointer;
