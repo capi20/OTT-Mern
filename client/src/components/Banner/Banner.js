@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { movieDBInstance } from "../../axios";
 import { backdrop_url, trendingAPI } from "../../Requests";
@@ -49,10 +49,12 @@ const Banner = ({}) => {
 			}}>
 			{movie ? (
 				<div className="banner">
-					<div className="banner__content-wrapper">
+					<div className="banner__content-wrapper app-padding">
 						<div className="banner__content">
 							<h1 className="movie-title mb-3">
-								{movie?.title || movie?.name || movie?.original_name}
+								{movie?.title ||
+									movie?.name ||
+									movie?.original_name}
 							</h1>
 							<div className="banner__content-buttons">
 								<button
@@ -63,7 +65,9 @@ const Banner = ({}) => {
 								</button>
 								<button
 									className="banner__content-button btn"
-									onClick={() => navigate(`/details/${movie.id}`)}>
+									onClick={() =>
+										navigate(`/details/${movie.id}`)
+									}>
 									<InfoIcon />
 									<span>More Info</span>
 								</button>
@@ -79,8 +83,6 @@ const Banner = ({}) => {
 					width="100%"
 				/>
 			)}
-
-			{/* <div className="banner-bottom" /> */}
 		</StyledBanner>
 	);
 };
