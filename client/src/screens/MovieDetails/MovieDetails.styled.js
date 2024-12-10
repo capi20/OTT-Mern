@@ -2,28 +2,37 @@ import styled from "styled-components";
 
 const StyledMovieDetails = styled.div`
 	color: white;
+	min-height: 100vh;
+	background-size: cover;
+	background-position: center center;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
 
 	.details {
 		display: flex;
 		justify-content: center;
 		gap: 70px;
-		margin-bottom: 50px;
 		margin-top: 50px;
+		margin-bottom: 40px;
+
+		@media only screen and (max-width: 900px) {
+			gap: 30px;
+		}
 
 		@media only screen and (max-width: 768px) {
 			flex-direction: column;
 			align-items: center;
-			gap: 30px;
 			margin-top: 0;
 		}
 
 		&-img {
 			width: 30%;
-			text-align: right;
-			max-width: 450px;
+			display: flex;
+			align-items: center;
 
-			@media only screen and (max-width: 768px) {
-				width: 50%;
+			@media only screen and (max-width: 900px) {
+				width: 40%;
 			}
 
 			img {
@@ -33,11 +42,14 @@ const StyledMovieDetails = styled.div`
 
 		&-content {
 			width: 50%;
-			color: #fff;
 			display: flex;
 			flex-direction: column;
 			gap: 20px;
 			font-size: 1.25rem;
+
+			@media only screen and (max-width: 900px) {
+				width: 60%;
+			}
 
 			@media only screen and (max-width: 768px) {
 				width: 100%;
@@ -65,7 +77,7 @@ const StyledMovieDetails = styled.div`
 			}
 
 			&--genre {
-				color: white;
+				color: gray;
 			}
 
 			&--btns {
@@ -91,26 +103,6 @@ const StyledMovieDetails = styled.div`
 						font-size: 30px;
 					}
 				}
-			}
-		}
-	}
-
-	.recommend {
-		margin-top: 60px;
-
-		h3 {
-			font-size: 1.5rem;
-		}
-
-		&-item {
-			display: flex;
-			gap: 15px;
-			overflow-y: auto;
-			overflow-x: scroll;
-			padding: 20px 0;
-
-			&::-webkit-scrollbar {
-				display: none;
 			}
 		}
 	}
