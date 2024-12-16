@@ -7,7 +7,6 @@ import { useAppContext } from "../context/AppContext";
 import { genreMap, searchAPI } from "../Requests";
 import { movieDBInstance } from "../axios";
 import NotFound from "../components/NotFound";
-import SectionWrapper from "../hoc/PageWrapper";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
@@ -54,7 +53,9 @@ const SearchScreen = () => {
 		const searchMovie = async () => {
 			apiStart();
 			try {
-				const res = await movieDBInstance.get(`${api}&page=${pageNumber}`);
+				const res = await movieDBInstance.get(
+					`${api}&page=${pageNumber}`
+				);
 				const data = res.data.results.length ? res.data.results : [];
 				setSearchResult([...searchResult, ...data]);
 				setHasMore(res.data.results.length > 0);
@@ -85,11 +86,12 @@ const SearchScreen = () => {
 	);
 
 	return (
-		<StyledSearchScreen>
+		<StyledSearchScreen className="app-padding">
 			<h1 className="page-heading">
 				{isSearch && (
 					<>
-						Results for <span className="color-primary">"{params.id}"</span>
+						Results for{" "}
+						<span className="color-primary">"{params.id}"</span>
 					</>
 				)}
 				{isGenre && `${genreMap[params.id]}`}
@@ -140,18 +142,25 @@ const SearchScreen = () => {
 				</div>
 			)}
 
-			{!isLoading && (isSearch || isGenre) && searchResult?.length === 0 && (
-				<NotFound message={"Oops! No result found"} notFound={false} />
-			)}
+			{!isLoading &&
+				(isSearch || isGenre) &&
+				searchResult?.length === 0 && (
+					<NotFound
+						message={"Oops! No result found"}
+						notFound={false}
+					/>
+				)}
 
-			{!isLoading && isWatchlist && Object.keys(watchList).length === 0 && (
-				<NotFound
-					message={"Your Watchlist is currently empty"}
-					notFound={false}
-				/>
-			)}
+			{!isLoading &&
+				isWatchlist &&
+				Object.keys(watchList).length === 0 && (
+					<NotFound
+						message={"Your Watchlist is currently empty"}
+						notFound={false}
+					/>
+				)}
 		</StyledSearchScreen>
 	);
 };
 
-export default SectionWrapper(SearchScreen);
+export default SearchScreen;
