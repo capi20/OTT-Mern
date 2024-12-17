@@ -4,16 +4,24 @@ import requests from "../Requests";
 import styled from "styled-components";
 
 const StyledRows = styled.div`
-	margin-top: -150px;
+	padding-top: 0;
+	padding-right: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 `;
 
 const HomeScreen = () => {
 	return (
 		<>
 			<Banner />
-			<StyledRows>
+			<StyledRows className="app-padding">
 				{requests.map((request) => (
-					<Row key={request[0]} title={request[0]} fetchUrl={request[1]} />
+					<Row
+						key={request[0]}
+						title={request[0]}
+						fetchUrl={request[1]}
+					/>
 				))}
 			</StyledRows>
 		</>
