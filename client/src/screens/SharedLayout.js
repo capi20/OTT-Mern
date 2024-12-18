@@ -5,7 +5,6 @@ import Alert from "@mui/material/Alert";
 import Header from "../components/Header/Header";
 import Modal from "../components/Modal/Modal";
 import { useAppContext } from "../context/AppContext";
-import { backdrop_url, poster_url } from "../Requests";
 
 const SharedLayout = () => {
 	const {
@@ -15,15 +14,12 @@ const SharedLayout = () => {
 		showAlert,
 		clearAlert,
 		alertType,
-		alertMsg,
-		bgImage,
-		updateBgImage
+		alertMsg
 	} = useAppContext();
 
 	const location = useLocation();
 
 	useEffect(() => {
-		updateBgImage("");
 		clearAlert(0);
 	}, [location.pathname]);
 
@@ -38,13 +34,7 @@ const SharedLayout = () => {
 			<Header />
 			<main
 				style={{
-					minHeight: "100vh",
-					backgroundImage: bgImage
-						? `linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url("${backdrop_url}${bgImage}")`
-						: "none",
-					backgroundSize: "cover",
-					backgroundPosition: "center center",
-					height: "100%"
+					minHeight: "100vh"
 				}}>
 				<Outlet />
 
@@ -55,7 +45,10 @@ const SharedLayout = () => {
 					<Snackbar
 						open={showAlert}
 						autoHideDuration={5000}
-						anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
+						anchorOrigin={{
+							vertical: "bottom",
+							horizontal: "center"
+						}}>
 						<Alert
 							severity={alertType ? alertType : "success"}
 							sx={{ width: "100%" }}>
