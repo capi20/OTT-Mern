@@ -36,7 +36,6 @@ function Row({ title, fetchUrl }) {
 		<StyledRow>
 			{isLoading && (
 				<>
-					<h2>{title}</h2>
 					<div className="row-posters">
 						{Array.from(Array(SkeletonCount), (e, i) => {
 							return (

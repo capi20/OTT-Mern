@@ -12,16 +12,11 @@ export const StyledRow = styled.div`
 			z-index: 1;
 			font-weight: 500;
 			margin: 0;
-			padding-left: 60px;
 			font-size: 20px;
+			padding-left: 7px;
 
 			@media only screen and (max-width: 768px) {
-				padding-left: 30px;
 				font-size: 18px;
-			}
-
-			@media only screen and (max-width: 540px) {
-				padding-left: 10px;
 			}
 		}
 
@@ -58,15 +53,7 @@ export const StyledRow = styled.div`
 		gap: 5px;
 		overflow-y: auto;
 		overflow-x: scroll;
-		padding: 10px 60px 30px;
-
-		@media only screen and (max-width: 768px) {
-			padding: 7px 30px 20px;
-		}
-
-		@media only screen and (max-width: 540px) {
-			padding: 7px 10px 20px;
-		}
+		padding: 7px;
 	}
 
 	.row-posters::-webkit-scrollbar {
