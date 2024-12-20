@@ -2,7 +2,6 @@ import { useState } from "react";
 import FormRow from "../../components/FormRow";
 import StyledAccount from "./Account.styled";
 import { useAppContext } from "../../context/AppContext";
-import PageWrapper from "../../hoc/PageWrapper";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const Account = () => {
@@ -34,7 +33,7 @@ const Account = () => {
 	};
 
 	return (
-		<StyledAccount>
+		<StyledAccount className="app-padding">
 			<form className="account" onSubmit={handleSubmit}>
 				{/* {showAlert && (
 					<Alert severity={alertType ? alertType : "success"}>{alertMsg}</Alert>
@@ -75,4 +74,4 @@ const Account = () => {
 		</StyledAccount>
 	);
 };
-export default PageWrapper(Account);
+export default Account;
