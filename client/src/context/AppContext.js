@@ -54,7 +54,6 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
-	const [bgImage, setBgImage] = useState("");
 	const [watchList, setWatchList] = useState({});
 
 	useEffect(() => {
@@ -69,13 +68,12 @@ export const AppProvider = ({ children }) => {
 			setWatchList(newObj);
 			displayAlert("Removed from watchlist", "success");
 		} else {
-			setWatchList((prevData) => ({ ...prevData, [movieId]: movieBanner }));
+			setWatchList((prevData) => ({
+				...prevData,
+				[movieId]: movieBanner
+			}));
 			displayAlert("Added to watchlist", "success");
 		}
-	};
-
-	const updateBgImage = (path) => {
-		setBgImage(path);
 	};
 
 	const getCurrentUser = async () => {
@@ -88,7 +86,19 @@ export const AppProvider = ({ children }) => {
 		// 	// if (error.response.status === 401) return;
 		// 	logoutUser(true);
 		// }
-		logoutUser(true);
+		// logoutUser(true);
+
+		// setting test user
+		dispatch({
+			type: GET_CURRENT_USER_SUCCESS,
+			payload: {
+				user: {
+					email: "testUser@test.com",
+					name: "test user",
+					testUser: true
+				}
+			}
+		});
 	};
 
 	const apiStart = () => {
@@ -195,7 +205,8 @@ export const AppProvider = ({ children }) => {
 		const movieData = await movieDBInstance.get(`/movie/${movieId}/videos`);
 		const vidId =
 			movieData.data.results.find(
-				(vid) => vid.name === "Trailer" || vid.name === "Official Trailer"
+				(vid) =>
+					vid.name === "Trailer" || vid.name === "Official Trailer"
 			) || movieData.data.results[0];
 
 		const renderData = <YouTube videoId={vidId.key} opts={opts} />;
@@ -219,9 +230,7 @@ export const AppProvider = ({ children }) => {
 				apiStart,
 				apiSuccess,
 				apiError,
-				bgImage,
 				watchList,
-				updateBgImage,
 				updateWatchList
 			}}>
 			{children}
